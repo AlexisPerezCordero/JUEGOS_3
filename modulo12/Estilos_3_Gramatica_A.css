@@ -127,7 +127,7 @@ body {
 .botones button {
     border-radius: 24px;
     margin-bottom: 10px;
-    margin-left: -40px;
+    margin-left: 40px;
     padding: 5px 5px;
     font-size: 16px;
     cursor: pointer;
