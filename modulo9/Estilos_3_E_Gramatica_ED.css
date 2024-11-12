@@ -20,7 +20,7 @@ body {
 }
 .rojo {
     color: #41cace67;
-    font-size: 24px; /* Tamaño más grande */
+    font-size: 12px; /* Tamaño más grande */
     font-weight: bold; /* Hacerlo más grueso */
 }
 .resaltar {
