@@ -119,8 +119,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 setTimeout(() => {
                     modal.style.display = "none";
                     modal.classList.remove("hide");
-                }, 500); 
-            }, 1200); 
+                }, 500);
+            }, 1200);
         }
     }
 
@@ -159,8 +159,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const salirBtn = document.getElementById('salirBtn');
 
         reintentarBtn.addEventListener('click', function () {
-            modalGameOver.style.display = 'none';
-            window.location.href = '6game1.html'
+            window.location.reload();
         });
 
         salirBtn.addEventListener('click', function () {
@@ -173,10 +172,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function animateHeartDisappearance(heart) {
-        heart.style.transition = 'opacity 0.5s ease-out'; // Agrega una transición para el efecto de desvanecimiento
-        heart.style.opacity = '0'; // Reduce gradualmente la opacidad del corazón hasta que desaparezca
+        heart.style.transition = 'opacity 0.5s ease-out'; //Agrega una transición para el efecto de desvanecimiento
+        heart.style.opacity = '0'; //Reduce gradualmente la opacidad del corazón hasta que desaparezca
         setTimeout(() => {
-            heart.style.display = 'none'; // Oculta el corazón después de que termine la animación
+            heart.style.display = 'none'; //Oculta el corazón después de que termine la animación
         }, 500); // La duración de la transición es de 0.5 segundos
     }
 
@@ -187,7 +186,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // Redirigir a la página de inicio
         window.location.href = "https://www.ejemplo.com";
     }
-
 
     function playAudio(audio) {
         if (audio.paused) {

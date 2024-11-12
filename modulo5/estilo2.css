@@ -66,18 +66,22 @@ body {
      /* Margen inferior para evitar que las imágenes se superpongan al encabezado del juego */
 }
 
-.board,
+.board{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Divide en tres columnas */
+    gap: 60px; /* Espacio entre elementos */
+}
 .options {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* Divide en tres columnas */
-    gap: 20px; /* Espacio entre elementos */
+    gap: 40px; /* Espacio entre elementos */
 }
 
 .card {
     width: 170px;
     height: 130px;
     margin-top: 3px;
-    
+    transition: transform 0.3s ease;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -89,9 +93,10 @@ body {
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
+    border-radius: 10px;
 }
 
-.card:hover img {
+.card:hover  {
     transform: scale(1.1);
 }
 
@@ -105,10 +110,10 @@ flex-wrap: wrap;
 }
 
 .word {
-    border: 2px solid #121435; 
+    border: 2px solid #2980b9; 
     text-align: center; /* Centra el texto */
-    background-color: #FFFFFF;
-    color: #121435;
+    background-color: #EEEEFF;
+    color: #3F3BE1;
     padding: 10px 20px;
     margin: 10px;
     border-radius: 20px;
@@ -157,21 +162,6 @@ flex-wrap: wrap;
     width: 40px;
     height: 40px;
     cursor: pointer;
-}
-
-/* Animación para mover la flecha de izquierda a derecha */
-@keyframes moveArrow {
-    0% {
-        transform: translateX(0);
-    }
-
-    50% {
-        transform: translateX(20px);
-    }
-
-    100% {
-        transform: translateX(0);
-    }
 }
 
 .modalNext {
@@ -226,6 +216,21 @@ flex-wrap: wrap;
     font-weight: bold;
 }
 
+/* Animación para mover la flecha de izquierda a derecha */
+@keyframes moveArrow {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(20px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
 /* Aplicar la animación a la flecha */
 #arrow-icon {
     animation: moveArrow 2s ease infinite;
@@ -239,7 +244,7 @@ flex-wrap: wrap;
 .texto {
     font-size: 15px;
     font-weight: bold;
-    color: #ffffff;
+    color: #FFFFFF;
 }
 
 .messages {
@@ -404,7 +409,7 @@ flex-wrap: wrap;
     font-family: 'Inter', sans-serif; /* Cambia el tipo de letra a Inter */
     font-size: 16px; /* Establece el tamaño del texto en 16px */
     font-weight: 800; /* Establece el peso del texto en 800 (extrabold) */
-    color: #E74423;
+    color: #D67D7D;
     
 }
 
@@ -463,9 +468,6 @@ flex-wrap: wrap;
         margin-left: auto;
         width: 200px;
         justify-content: center;
-    }
-    .modalNext-content p{
-        font-size: 1.5em;
     }
 
     .info p {
@@ -571,10 +573,6 @@ flex-wrap: wrap;
         margin-left: auto;
         margin-right: auto;
     }
-
-    .modalNext-content p{
-        font-size: 1.5em;
-    }
     .board {
         display: grid;
         grid-template-columns: repeat(3, 1fr); /* Divide en tres columnas */
@@ -610,9 +608,7 @@ flex-wrap: wrap;
         margin-left: auto;
         margin-right: auto;
     }
-    .modalNext-content p{
-        font-size: 1.0em;
-    }
+    
     .options {
         width: 90%;
         margin-top: -20px;
@@ -709,13 +705,14 @@ flex-wrap: wrap;
         margin-top: -20px;
         order: 2 !important; /* ¡Agrega !important para priorizar este estilo! */
     }
+    .modalNext-content p{
+        font-size: 0.8em;
+    }
     .board {
       
         gap: 12px; /* Espacio entre elementos */
     }
-    .modalNext-content p{
-        font-size: 0.8em;
-    }
+
     .card {
         width: 120px;
         height: 120px;

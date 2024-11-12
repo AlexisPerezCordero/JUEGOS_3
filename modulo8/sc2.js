@@ -11,10 +11,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const arrowIcon = document.getElementById('arrow-icon');
     const completedMessage = document.getElementById('completed');
     const charactersModal = document.getElementById('charactersModal');
-    const showCharactersBtn = document.getElementById('showCharactersBtn');
+    
     const closeBtns = document.querySelectorAll('.close');
-    const restartBtn = document.getElementById('restartBtn');
-    charactersModal.style.display = 'block';
     const muteIcon = document.querySelector('#mute-icon');
     const soundIcon = document.querySelector('#sound-icon');
     var audio = document.querySelector('#audioElement');
@@ -39,9 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
         icon.style.display = 'block';
         icono.style.display = 'none';
     });
-    showCharactersBtn.addEventListener('click', function () {
-        charactersModal.style.display = 'block';
-    });
+    
 
     closeBtns.forEach(btn => {
         btn.addEventListener('click', function () {
@@ -139,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Mostrar la flecha para avanzar al siguiente juego
             arrowIcon.style.display = 'inline-block';
             arrowIcon.addEventListener('click', function () {
-                window.location.href = '../final.html';
+                window.location.href = 'game3.html';
             });
             setTimeout(() => {
                 modal.classList.remove("show");
@@ -205,8 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         reintentarBtn.addEventListener('click', () => {
-            modalGameOver.style.display = 'none';
-            window.location.href = 'game3.html';
+            window.location.reload();
         });
 
         salirBtn.addEventListener('click', () => {

@@ -1,9 +1,32 @@
 body {
     padding: 0;
+    margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #FBF2F2;
+    background-color: #FBF2F2; /* Color de fondo de la página */
+    position: relative;
 }
 
+/* Estilos para el fondo con diseño */
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('patron.png'); /* Ruta de la imagen de fondo con diseño */
+    opacity: 0.5; /* Opacidad inicial */
+    animation: animateBackground 1s linear infinite alternate; /* Animación del fondo */
+}
+@keyframes animateBackground {
+    0% {
+        opacity: 0.5; /* Opacidad inicial */
+        transform: translateY(0); /* Sin movimiento inicial */
+    }
+    100% {
+        opacity: 0.6; /* Opacidad final */
+        transform: translateY(-10px); /* Movimiento hacia arriba */
+    }
+}
 .container {
     background-image: linear-gradient(to right, #5f66e2, #414478);
     border-radius: 0.4pc;
@@ -18,275 +41,156 @@ body {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     animation: vibrarLogo 1s infinite alternate;
 }
+@keyframes bounceAnimation {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
 
-.texto {
-    font-size: 15px;
-    font-weight: bold;
-    color: #ffffff;
+.images,
+.options {
+    width: 25%;
+    margin: 1%;
+}
+.images {
+    
+    margin-top: 100px;
+    margin-right: 350px;
+    margin-left: -200px; /* Margen superior para evitar que las imágenes se superpongan al banner */
+     /* Margen inferior para evitar que las imágenes se superpongan al encabezado del juego */
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* Divide en tres columnas */
+    gap: 50px; /* Espacio entre elementos */
+    justify-items: center;
+}
+
+.board > :nth-child(1),
+.board > :nth-child(2),
+.board > :nth-child(3) {
+    grid-column: span 2; 
 }
 
 
-.info {
-    align-items: center;
-    justify-content: center;
-    border-radius: 1cap;
-    width: 120px;
-    height: 30px;
-    margin-left: 10%;
-    margin-right: 10%;
-    border: 2px solid #FFFFFF;
-    display: flex;
-    background-color: #FFFFFF;
+.board > :nth-child(4) {
+    grid-column: span 3; 
+}
+
+.board > :nth-child(5) {
+    grid-column: span 2; 
+}
+
+
+.options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Divide en tres columnas */
+    gap: 40px; /* Espacio entre elementos */
+}
+
+.boxtocard {
+    width: 170px;
+    height: 160px;
+    margin-top: 3px;
+    margin:10px;
+    transition: transform 0.3s ease;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.card {
+    width: 170px;
+    height: 130px;
+    margin-top: 3px;
+    transition: transform 0.3s ease;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
     border-radius: 10px;
 }
 
-.imagendato {
-    display: none;
-}
-
-.info p {
-    display: none;
-}
-
-.info svg {
-    width: 20px;
-    height: 20px;
-    margin-left: 5px;
-}
-
-.oraciones {
-    margin-top: 40px;
-    margin-left: 18%;
-}
-
-.oraciones p {
-    margin-bottom: 40px;
-    font-size: 20px;
-}
-
-.selected {
+.card:hover  {
     transform: scale(1.1);
-    border-color: rgb(153, 255, 0);
-    color: black !important;
-    background-color: rgb(210, 241, 197) !important;
 }
 
-.destroyed {
-    opacity: 0.5;
-    /* Reducir la opacidad */
-    filter: grayscale(100%);
-    pointer-events: none;
-    /* Desactivar los eventos del mouse */
-    cursor: default;
-    /* Cambiar el cursor a predeterminado */
-}
-
-/* Estilos para los contenedores vacíos */
-.contenedor {
-    display: inline-block;
-    vertical-align: middle;
-    width: 89px;
-    height: 40px;
-    border: 1px solid #000;
-    margin: 0 5px;
-    border-radius: 2cap;
-    position: relative;
-    background-color: white;
-    box-shadow: 0px 0px 3px;
-}
-
-
-/* Estilos para los botones dentro de los contenedores */
-.contenedor .boton {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90px;
-    height: 40px;
-    border-radius: 2cap;
-    background-color: #cdf68f;
-    font-size: 18px;
-}
-
-.botones {
-    margin-top: 80px;
-    margin-left: 10%;
+.options {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px; /* Agrega un margen a la izquierda para separarlas */
+    margin-top: 90px;
     flex-wrap: wrap;
 }
 
-.botones button {
-    margin-bottom: 15px;
-    border-radius: 4cap;
+.word {
+    border: 2px solid #2980b9; 
+    text-align: center; /* Centra el texto */
+    background-color: #EEEEFF;
+    color: #3F3BE1;
     padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    width: 90px;
-    height: 40px;
-    margin-right: 15px;
-    box-shadow: 0px 0px 10px rgba(6, 101, 202, 0.5);
-    background-color: rgb(211, 229, 245);
-}
-
-.botones button:hover {
-    background-color: rgb(81, 157, 224);
-    color: white;
-}
-
-/*************************/
-
-/* Modal */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-
-}
-
-.modal-content {
-    background-image: url('../imagen/fondoderrota.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 60%;
-    height: 200px;
-    color: white;
-    border-radius: 3cap;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 1.5);
-}
-
-.modal-buttons {
-    text-align: center;
-    margin-top: 50px;
-}
-
-.modal-buttons button {
     margin: 10px;
-    padding: 10px 20px;
-    font-size: 20px;
-    border: 2px solid #505050;
-    background-color: rgba(30, 68, 255, 0.747);
-    border-radius: 1cap;
-    color: #fff;
+    border-radius: 20px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: 'Playfair Display', cursive;
+    transition: background-color 0.3s ease;
+    
+    /* Cambios en el tipo de letra, tamaño y peso */
+    font-family: 'Inter', sans-serif; /* Cambia el tipo de letra a Inter */
+    font-size: 16px; /* Establece el tamaño del texto en 20px */
+    font-weight: 500; /* Establece el peso del texto en 500 (medium) */
+}
+/* Estilos para el icono Mute */
+#mute-icon {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    fill: #000000;
+    display: none;
 }
 
-.modal-content img {
-    width: 100%;
-    height: auto;
+/* Estilos cuando se pasa el cursor sobre el icono */
+#mute-icon:hover {
+    fill: #655d5d;
 }
 
-
-.icono-ayuda{
-    width: 80px;
+#sound-icon{
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    fill: #000000;
+    display: block;
 }
 
-.modal-buttons button:hover {
-    background-color: rgb(119, 217, 255);
-    color: #000;
-    transform: scale(1.1);
-}
-
-/* Estilos del modal */
-.modaldato {
+/* Estilos para el icono de flecha */
+#arrow-icon {
     display: none;
     position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
-    /* Fondo semi-transparente */
-}
-
-/* Estilos del modal centrado */
-.modal-contenido {
-    background: linear-gradient(to bottom, #ADD8E6, #4169E1);
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    /* Sombra suave */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 80%;
-    /* Habilitar scroll vertical si el contenido es demasiado largo */
-}
-
-.tabla-verbo {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background-color: #ddd;
-}
-
-.tabla-verbo th, .tabla-verbo td {
-    border: 1px solid black;
-    padding: 8px;
-    text-align: center;
-}
-
-.tabla-verbo tr:hover {
-    background-color: #9b9595;
-}
-
-.cerrar-container {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
-}
-
-.cerrar {
-    color: #FFF;
-    /* Texto blanco */
-    font-size: 24px;
-}
-
-.titulo-modal h2 {
-    color: #FFF;
-    /* Texto blanco */
-    font-family: 'Comic Sans MS', cursive;
-    margin-bottom: 10px;
-}
-
-.red {
-    color: red;
-        background-color: transparent;
-}
-@keyframes corazonRoto {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.2);
-    }
-
-    100% {
-        opacity: 0;
-        transform: scale(0);
-    }
-}
-
-.corazon-roto {
-    animation: corazonRoto 1s ease forwards;
 }
 
 .modalNext {
@@ -334,22 +238,11 @@ body {
 }
 
 .modalNext-content p {
-    font-size: 0.8em;
+    font-size: 1.5em;
     color: #ffffff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     margin: 0;
     font-weight: bold;
-}
-
-/* Estilos para el icono de flecha */
-#arrow-icon {
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
 }
 
 /* Animación para mover la flecha de izquierda a derecha */
@@ -372,119 +265,218 @@ body {
     animation: moveArrow 2s ease infinite;
 }
 
-/* Estilos para el icono Mute */
-#mute-icon {
+.word:hover {
+    background-color: #2980b9;
+    color: #EEEEFF;
+}
+
+.texto {
+    font-size: 15px;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+.messages {
     position: fixed;
-    bottom: 20px;
-    left: 20px;
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
-    fill: #000000;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
     display: none;
+    font-size: 24px;
+    color: white;
+    text-align: center;
 }
 
-/* Estilos cuando se pasa el cursor sobre el icono */
-#mute-icon:hover {
-    fill: #655d5d;
+#correct-message {
+    background-color: #2ecc71;
+    padding: 20px;
+    border-radius: 10px;
 }
 
-#sound-icon{
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    width: 25px;
-    height: 25px;
+#error-message {
+    background-color: #e74c3c;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#completed {
+    background-color: #3498db;
+    padding: 40px;
+    border-radius: 10px;
+}
+.selected {
+    border: 3px solid green; /* Cambia el borde a verde */
+    transform: scale(1.1); /* Agranda un poco la imagen */
+}
+.destroyed {
+    opacity: 0.5; /* Reducir la opacidad */
+    filter: grayscale(100%); /* Convertir la imagen en escala de grises */
+    pointer-events: none; /* Desactivar los eventos del mouse */
+    cursor: default; /* Cambiar el cursor a predeterminado */
+    /* También puedes añadir otras propiedades de estilo según sea necesario */
+}
+.action-text {
+    position: absolute;
+    bottom: 5px; /* Ajusta la posición del texto */
+    left: 50%; /* Centra el texto horizontalmente */
+    transform: translateX(-50%); /* Centra el texto horizontalmente */
+    display: none; /* Oculta el texto inicialmente */
+}
+
+.card.destroyed .action-text {
+    display: block; /* Muestra el texto cuando la carta está destruida */
+    color: white; /* Cambia el color del texto */
+}
+
+@keyframes destroyAnimation {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+}
+
+
+.info {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 2cap;
+    width: 50%;
+    margin-left: 20%;
+    margin-right: 10%;
+}
+
+
+
+.oraciones {
+    display: flex;
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-items: flex-start; /* Alínea los elementos en la parte superior */
+    margin-top: -60px;
+    margin-left: 17%;
+}
+
+
+/* Estilos para los contenedores vacíos */
+.contenedor {
+    display: inline-block;
+    vertical-align: middle;
+    width: 89px;
+    height: 40px;
+    border: 1px solid #000;
+    margin: 0 5px;
+    border-radius: 2cap;
+    position: relative;
+}
+
+/* Estilos para los botones dentro de los contenedores */
+.contenedor .boton {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90px;
+    height: 40px;
+    border-radius: 2cap;
+    background-color: greenyellow;
+    font-size: 15px;
+}
+
+.botones {
+    margin-top: 80px;
+    margin-left: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.botones button {
+    margin-bottom: 15px;
+    border-radius: 4cap;
+    padding: 10px 20px;
+    font-size: 16px;
     cursor: pointer;
-    fill: #000000;
-    display: block;
+    width: 90px;
+    height: 40px;
+    margin-right: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+.options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+    margin-top: 60px; /* Ajusta el margen superior para mover las opciones más arriba */
+    flex-wrap: wrap;
+}
+
+
+/*/
+
+/* Modal */
+
+
+.game-info {
+    display: flex;
+    align-items: center;
+    width: calc(100% - 100px); /* Resta el ancho del contenedor de los corazones más un margen adicional */
+    justify-content: space-between;
+    padding: 0 20px; /* Agrega un relleno a los lados */
+     /* Ocupa todo el ancho disponible */
+    max-width: 1000px; /* Establece un ancho máximo */
+    margin: 0 auto;
+}
+
+
+.hearts-container p2 {
+    font-family: 'Inter', sans-serif; /* Cambia el tipo de letra a Inter */
+    font-size: 16px; /* Establece el tamaño del texto en 16px */
+    font-weight: 800; /* Establece el peso del texto en 800 (extrabold) */
+    color: #D67D7D;
+    
+}
+
+
+/* Estilos para los corazones o vidas del juego */
+.hearts-container {
+    display: flex;
+    align-items: center;
+    border: 2px solid #FFFFFF; /* Agrega un borde al contenedor */
+    padding: 7px; /* Agrega espacio interno alrededor del contenido */
+    border-radius: 10px; /* Agrega bordes redondeados al contenedor */
+    background-color: #FFFFFF;
+        
+    
+}
+
+
+.heart {
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
 }
 
 
 @keyframes vibrarLogo {
     0% {
-        transform: translateY(-3px);
+        transform: translateY(0);
     }
-
+    50% {
+        transform: translateY(-8px);
+    }
     100% {
-        transform: translateY(3px);
+        transform: translateY(0);
     }
 }
 
-@media screen and (max-width: 1309px) and (min-width: 935px) {
-    body {
-        margin: 0;
-    }
-
-    .container {
-        max-width: 1289px;
-        height: 100px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .texto {
-        font-size: 18px;
-    }
-
-    .imagendato {
-        display:none;
-    }
-    
-    .info {
-        margin-left: auto;
-        padding: 7px;
-        width: 120px;
-        height: 20px;
-        align-items: center;
-        border: 2px solid #FFFFFF;
-        display: flex;
-        background-color: #FFFFFF;
-        border-radius: 10px;
-    }
-
-    .info p {
-        font-family: 'Inter', sans-serif;
-        font-size: 16px;
-        font-weight: 800;
-        display: flex;
-    }
-
-    .info svg {
-        width: 20px;
-        height: 20px;
-        margin-left: 5px;
-    }
-
-    .oraciones {
-        margin-left: 10%;
-        float: left;
-    }
-
-    .oraciones p {
-        font-size: 25px;
-    }
-
-    .botones {
-        margin-top: 50px;
-        flex-direction: column;
-        float: right;
-        margin-right: 20%;
-    }
-
-    .botones button {
-        margin-bottom: 45px;
-        margin-right: 15px;
-    }
-
-    .img {
-        margin-top: 15px;
-    }
-}
 
 @media (min-width: 1310px) {
-    
-
     body {
         margin: 0;
     }
@@ -500,54 +492,35 @@ body {
         font-size: 18px;
     }
 
-    .imagendato {
-        display:flex;
-        position: absolute;
-        width: 200px;
-        height: auto;
-        margin-left: 80%;
-        margin-top: 8%;
-    }
-    
+
     .info {
         margin-left: auto;
-        padding: 7px;
-        width: 120px;
-        height: 20px;
-        align-items: center;
-        border: 2px solid #FFFFFF;
-        display: flex;
-        background-color: #FFFFFF;
-        border-radius: 10px;
+        width: 200px;
+        justify-content: center;
     }
 
     .info p {
-        font-family: 'Inter', sans-serif;
-        font-size: 16px;
-        font-weight: 800;
-        display: block;
+        margin-left: 10px;
+        margin-right: 10px;
     }
 
     .info svg {
-        width: 20px;
-        height: 20px;
         margin-left: 5px;
     }
-    .modalNext-content p{
-        font-size: 1.5em;
-    }
+
     .oraciones {
         margin-left: 10%;
         float: left;
     }
 
     .oraciones p {
-        font-size: 25px;
+        font-size: 17px;
+        margin-top: 5px;
     }
 
     .botones {
         margin-top: 50px;
-        margin-right: 400px;
+        margin-right: 200px;
         float: right;
         flex-direction: column;
 
@@ -556,9 +529,273 @@ body {
     .botones button {
         margin-bottom: 45px;
     }
+    
 
-    .img {
-        margin-top: 15px;
+}
+
+@media screen and (min-width: 1160px) and (max-width: 1309px) {
+    body {
+        margin: 0;
+    }
+    .images {
+        /* Ajusta el margen derecho para mover las imágenes hacia el lado */
+        margin-left: -290px; /* Margen izquierdo para evitar que las imágenes se superpongan al banner */
+    }
+    .container {
+        max-width: 1289px;
+        height: 100px;
+        margin-left: auto;
+        margin-right: auto;
     }
     
+    
+    .board {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Divide en tres columnas */
+        gap: 12px; /* Espacio entre elementos */
+    }
+    .options {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Divide en tres columnas */
+        gap: 8px; /* Espacio entre elementos */
+    }
+        
+       
+        .card {
+            width: 150px;
+            height: 130px;
+            margin-top: 3px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+        
+       
+        .oraciones {
+            margin-left: 20%;
+            float: left;
+        }
+       
+       
+    
+    
+    
+       
+    
+        
+    }
+
+   @media screen and (min-width: 900px) and (max-width: 1159px) {
+    body {
+        margin: 0;
+    }
+    .images {
+    
+        margin-top: 100px;
+        margin-right: 260px;
+        margin-left: -290px; /* Margen superior para evitar que las imágenes se superpongan al banner */
+         /* Margen inferior para evitar que las imágenes se superpongan al encabezado del juego */
+    }
+    .container {
+        max-width: 1289px;
+        height: 100px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .board {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Divide en tres columnas */
+        gap: 12px; /* Espacio entre elementos */
+    }
+    .options {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Divide en dos columnas */
+        gap: 11px; /* Espacio entre elementos */
+    }
+    .card {
+        width: 150px;
+        height: 130px;
+        margin-top: 3px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+    }
+    .oraciones {
+        margin-left: 20%;
+        float: left;
+    }
+}
+
+@media screen and (min-width: 680px) and (max-width: 899px) {
+    /* Ajustes específicos para dispositivos con anchura entre 301px y 899px */
+    .board {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Divide en tres columnas */
+        gap: 5px; /* Espacio entre elementos */
+        justify-items: center;
+    }
+    
+    .board > :nth-child(1),
+    .board > :nth-child(2),
+    .board > :nth-child(3),
+    .board > :nth-child(4) {
+        grid-column: span 1; 
+    }
+    .board > :nth-child(5) {
+        grid-column: span 2; 
+    }
+    
+
+    .container {
+        max-width: 90%; /* Cambia a un porcentaje del ancho de la pantalla */
+        height: 100px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .options {
+        width: 90%;
+        margin-top: -20px;
+        order: 2 !important; /* ¡Agrega !important para priorizar este estilo! */
+    }
+    
+    
+    .oraciones p {
+        font-size: 17px;
+        margin-top: 5px;
+    }
+    
+    .botones {
+        text-align: center; /* Centra los botones horizontalmente */
+        margin-top: 20px; /* Ajusta el margen superior de los botones */
+    }
+    
+   
+
+    /* Oculta el icono de mute */
+    .mute-button {
+        display: none;
+    }
+
+    .card {
+        width: 100%; /* Cambia a un porcentaje del ancho de la pantalla */
+        /* Permite que la altura se ajuste automáticamente */
+        max-width: 200px; /* Establece un ancho máximo para las tarjetas */
+        margin-top: -20px; /* Ajusta el margen superior */
+        margin-bottom: 20px; /* Ajusta el margen inferior */
+        margin-left: auto; /* Centra horizontalmente */
+        margin-right: auto; /* Centra horizontalmente */
+    }
+
+
+    .images {
+        width: 100%; /* Cambia a un porcentaje del ancho de la pantalla */
+       
+        margin-bottom: 50px; /* Ajusta el margen inferior */
+        margin-left: -90px; 
+        margin-right: 30px; 
+    }
+    .hearts-container p2 {
+        display: none; /* Oculta la palabra "Vidas" */
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 679px) {
+    /* Ajustes específicos para dispositivos con anchura entre 301px y 899px */
+    .board {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Divide en tres columnas */
+        gap: 5px; /* Espacio entre elementos */
+        justify-items: center;
+    }
+    
+    .board > :nth-child(1),
+    .board > :nth-child(2),
+    .board > :nth-child(3),
+    .board > :nth-child(4) {
+        grid-column: span 1; 
+    }
+    .board > :nth-child(5) {
+        grid-column: span 2; 
+    }
+   
+    .mute-button {
+        display: none;
+    }
+    .images {
+        width: 100%; /* Cambia a un porcentaje del ancho de la pantalla */
+       
+        margin-bottom: 50px; /* Ajusta el margen inferior */
+        margin-left: -130px; 
+        margin-right: 30px; 
+    }
+    .options {
+        width: 90%;
+        margin-top: -20px;
+        order: 2 !important; /* ¡Agrega !important para priorizar este estilo! */
+    }
+    .modalNext-content p{
+        font-size: 0.8em;
+    }
+    .board {
+      
+        gap: 12px; /* Espacio entre elementos */
+    }
+    .hearts-container p2 {
+        display: none; /* Oculta la palabra "Vidas" */
+    }
+}
+
+@media screen and (min-width: 200px) and (max-width: 599px) {
+    /* Ajustes específicos para dispositivos con anchura entre 301px y 899px */
+    .board {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Divide en tres columnas */
+        gap: 5px; /* Espacio entre elementos */
+        justify-items: center;
+    }
+    
+    .board > :nth-child(1),
+    .board > :nth-child(2),
+    .board > :nth-child(3),
+    .board > :nth-child(4) {
+        grid-column: span 1; 
+    }
+    .board > :nth-child(5) {
+        grid-column: span 2; 
+    }
+   
+    .mute-button {
+        display: none;
+    }
+    .images {
+        width: 100%; /* Cambia a un porcentaje del ancho de la pantalla */
+       
+        margin-bottom: 50px; /* Ajusta el margen inferior */
+        margin-left: -27px; 
+        margin-right: 30px; 
+    }
+    .options {
+        width: 90%;
+        margin-top: -20px;
+        order: 2 !important; /* ¡Agrega !important para priorizar este estilo! */
+    }
+    .modalNext-content p{
+        font-size: 0.8em;
+    }
+    .board {
+      
+        gap: 12px; /* Espacio entre elementos */
+    }
+
+    .card {
+        width: 120px;
+        height: 120px;
+      
+    }
+    .hearts-container p2 {
+        display: none; /* Oculta la palabra "Vidas" */
+    }
 }

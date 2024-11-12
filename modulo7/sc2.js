@@ -24,135 +24,177 @@ muteIcon.addEventListener('click', () => {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-    const buttons = document.querySelectorAll('.boton');
-    const containers = document.querySelectorAll('.contenedor');
-    const flecha = document.querySelector('#arrow-icon');
-    const modal2 = document.getElementById("modal");
-    const maxAttempts = 3;
-    let attempts = 0;
-    let selectedButton = null;
-    let correctMatches = 0;
+    const cards = document.querySelectorAll('.card');
+    const words = document.querySelectorAll('.word');
+    const correctMessage = document.getElementById('correct-message');
+    const errorMessage = document.getElementById('error-message');
+    const completedMessage = document.getElementById('completed');
+    const modalGameOver = document.getElementById('gameOverModal');
 
     // Sonidos
     const audioCorrecto = new Audio('../audio/correcto.mp3');
     const audioIncorrecto = new Audio('../audio/incorrecto.mp3');
     const audioGameOver = new Audio('../audio/gameover.mp3');
 
-    buttons.forEach(button => {
-        button.addEventListener('click', selectWord);
+    let selectedCard = null;
+    let selectedWord = null;
+    let attempts = 0;
+    const maxAttempts = 3;
+    let matchedPairs = 0;
+    const totalPairs = cards.length / 2;
+    let lives = 3; // Número inicial de vidas
+
+    // Selector de corazones
+    const hearts = document.querySelectorAll('.heart');
+
+    cards.forEach(card => {
+        card.addEventListener('click', selectCard);
     });
 
-    containers.forEach(container => {
-        container.addEventListener('click', placeWord);
+    words.forEach(word => {
+        word.addEventListener('click', selectWord);
     });
-    function playSound(sound) {
-        sound.pause(); // Detener el sonido actual antes de reproducirlo nuevamente
-        sound.currentTime = 0; // Reiniciar el tiempo de reproducción al principio
-        sound.play(); // Reproducir el sonido
+
+    function selectCard() {
+        if (selectedCard === null || this !== selectedCard) {
+            if (selectedCard !== null) {
+                selectedCard.classList.remove('selected');
+                selectedCard.style.border = '';
+                selectedCard.style.transform = '';
+            }
+            selectedCard = this;
+            this.classList.add('selected');
+            this.style.border = '3px solid green';
+            this.style.transform = 'scale(1.1)';
+        }
     }
+
     function selectWord() {
-        if (selectedButton) {
-            selectedButton.classList.remove('selected'); // Elimina la selección del botón anterior
-        }
-
-        selectedButton = this;
-        this.classList.add('selected'); // Aplica la selección al botón actual
-    }
-
-    function placeWord() {
-        if (!selectedButton) return;
-
-        const buttonWord = selectedButton.dataset.word;
-        const containerWord = this.dataset.word;
-
-        if (buttonWord === containerWord) {
-            const buttonClone = selectedButton.cloneNode(true);
-            this.innerHTML = ''; // Elimina cualquier contenido existente en el contenedor
-            this.appendChild(buttonClone); // Agrega el clon del botón al contenedor
-            playSound(audioCorrecto); // Reproduce el sonido antes de realizar las operaciones
-            this.classList.add('correct');
-            selectedButton.classList.add('destroyed');
-            correctMatches++;
-            checkCompletion();
-        } else {
-            playSound(audioIncorrecto); // Reproduce el sonido antes de realizar las operaciones
-            attempts++;
-            updateLives();
-        }
-
-        selectedButton.classList.remove('selected');
-        selectedButton = null;
-    }
-
-
-    function updateLives() {
-        const hearts = document.querySelectorAll('.heart');
-        if (attempts <= maxAttempts) {
-            playSound(audioIncorrecto); // Reproduce el sonido antes de realizar las operaciones
-            animateHeartDisappearance(hearts[attempts - 1]);
-        }
-
-        if (attempts >= maxAttempts) {
-            playSound(audioGameOver); // Reproduce el sonido antes de realizar las operaciones
-            showGameOver();
+        if (selectedCard) {
+            selectedWord = this;
+            const word = this.dataset.word;
+            const cardWord = selectedCard.dataset.word;
+            if (word === cardWord) {
+                correctMatch();
+            } else {
+                incorrectMatch();
+            }
         }
     }
 
-    function checkCompletion() {
-        if (correctMatches === containers.length) {
-            modal2.style.display="flex";
-            modal2.classList.add("show");
-            flecha.style.display = 'block'; // Muestra la flecha al completar todo el juego
-            flecha.addEventListener('click', () => {
-                window.location.href = 'game3.html'; // Redirige a game3.html al hacer clic en la flecha
+    function correctMatch() {
+        selectedCard.classList.add('destroyed');
+        selectedWord.classList.add('destroyed');
+        selectedCard.removeEventListener('click', selectCard);
+        selectedCard = null;
+        selectedWord = null;
+        matchedPairs++;
+        correctMessage.style.display = 'block';
+        playAudio(audioCorrecto);
+        setTimeout(function () {
+            correctMessage.style.display = 'none';
+        }, 1000);
+
+        if (matchedPairs === totalPairs) {
+            completedMessage.style.display = 'block';
+
+        }
+
+        // Verificar si todas las cartas están deshabilitadas
+        const allDisabled = Array.from(cards).every(card => card.classList.contains('destroyed'));
+
+        if (allDisabled) {
+            // Todas las cartas están deshabilitadas, mostrar la flecha
+            const arrowIcon = document.getElementById('arrow-icon');
+            const modal = document.getElementById("modal");
+            modal.style.display="flex";
+            modal.classList.add("show");
+            arrowIcon.style.display = 'inline-block'; // Cambia 'inline-block' según el estilo de la flecha en tu CSS
+            arrowIcon.addEventListener('click', function() {
+                window.location.href = 'game3.html';
             });
             setTimeout(() => {
-                modal2.classList.remove("show");
-                modal2.classList.add("hide");
+                modal.classList.remove("show");
+                modal.classList.add("hide");
                 setTimeout(() => {
-                    modal2.style.display = "none";
-                    modal2.classList.remove("hide");
-                }, 500); 
-            }, 1200); 
+                    modal.style.display = "none";
+                    modal.classList.remove("hide");
+                }, 500);
+            }, 1200);
         }
     }
 
-    function showGameOver() {
-        const gameOverModal = document.querySelector('#gameOverModal');
-        gameOverModal.style.display = 'block';
-        document.querySelector('#reintentarBtn').addEventListener('click', () => location.reload());
-        document.querySelector('#salirBtn').addEventListener('click', () => window.location.href = '../index.html');
+    function incorrectMatch() {
+        selectedCard.classList.add('incorrect');
+        selectedWord.classList.add('incorrect');
+        selectedCard.classList.remove('selected');
+        selectedCard.style.border = '';
+        selectedCard.style.transform = '';
+        selectedCard = null;
+        selectedWord = null;
+        attempts++;
+        errorMessage.style.display = 'block';
+        playAudio(audioIncorrecto);
+        setTimeout(function () {
+            errorMessage.style.display = 'none';
+        }, 1000);
+
+        // Reducir el número de vidas y animar la desaparición de un corazón
+        lives--;
+        if (lives >= 0) {
+            animateHeartDisappearance(hearts[lives]); // Animar la desaparición del corazón correspondiente
+        }
+
+        if (attempts === maxAttempts) {
+            setTimeout(function () {
+                mostrarGameOver();
+            }, 500);
+        }
+    }
+
+    function mostrarGameOver() {
+        modalGameOver.style.display = 'block';
+
+        const reintentarBtn = document.getElementById('reintentarBtn');
+        const salirBtn = document.getElementById('salirBtn');
+
+        reintentarBtn.addEventListener('click', function () {
+            window.location.reload();
+        });
+
+        salirBtn.addEventListener('click', function () {
+            modalGameOver.style.display = 'none';
+            window.location.href = '../index.html'
+        });
+
+        audioGameOver.volume = 0.5;
+        audioGameOver.play();
     }
 
     function animateHeartDisappearance(heart) {
-        heart.style.transition = 'opacity 0.5s ease-out'; // Agrega una transición para el efecto de desvanecimiento
-        heart.style.opacity = '0'; // Reduce gradualmente la opacidad del corazón hasta que desaparezca
+        heart.style.transition = 'opacity 0.5s ease-out'; //Agrega una transición para el efecto de desvanecimiento
+        heart.style.opacity = '0'; //Reduce gradualmente la opacidad del corazón hasta que desaparezca
         setTimeout(() => {
-            heart.style.display = 'none'; // Oculta el corazón después de que termine la animación
+            heart.style.display = 'none'; //Oculta el corazón después de que termine la animación
         }, 500); // La duración de la transición es de 0.5 segundos
     }
-});
 
-// Obtener el modal y el botón para abrirlo
-const modal = document.getElementById('miModal');
-const iconoAyuda = document.getElementById('abrirModal');
+    var closeSVG = document.querySelector(".close-svg");
 
-// Obtener el botón para cerrar el modal
-const btnCerrarModal = document.getElementsByClassName('cerrar')[0];
+    // Función para manejar el clic en el SVG de cierre
+    function handleCloseClick() {
+        // Redirigir a la página de inicio
+        window.location.href = "https://www.ejemplo.com";
+    }
 
-// Función para abrir el modal al hacer clic en el icono de ayuda
-iconoAyuda.addEventListener('click', () => {
-  modal.style.display = 'block';
-});
-
-// Función para cerrar el modal al hacer clic en el botón de cerrar
-btnCerrarModal.addEventListener('click', () => {
-  modal.style.display = 'none';
-});
-
-// Función para cerrar el modal si se hace clic fuera de él
-window.addEventListener('click', (evento) => {
-  if (evento.target === modal) {
-    modal.style.display = 'none';
-  }
+    function playAudio(audio) {
+        if (audio.paused) {
+            audio.currentTime = 0;
+            audio.play();
+        } else {
+            audio.pause();
+            audio.currentTime = 0;
+            audio.play();
+        }
+    }
 });

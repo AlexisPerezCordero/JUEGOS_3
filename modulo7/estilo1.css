@@ -8,6 +8,196 @@ body {
     position: relative;
 }
 
+.modal2-content {
+    background-color: #f0f0f0;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    width: 80%;
+    max-width: 800px;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.characters-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.flip-card {
+    background-color: transparent;
+    width: 190px;
+    height: 280px;
+    perspective: 1000px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.flip-card-front {
+    background-color: #03a9f4;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flip-card-back {
+    background-color: #f44336;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: rotateY(180deg);
+}
+
+.imagen-alimento {
+    width: 100%;
+    /* Establece un tamaño fijo para el contenedor de la imagen */
+    height: 50%;
+    /* Establece un tamaño fijo para el contenedor de la imagen */
+    border-radius: 10px;
+    /* Hace que el contenedor de la imagen sea circular */
+    overflow: hidden;
+    /* Oculta cualquier parte de la imagen que se desborde del contenedor */
+    border: 4px solid #fff;
+    /* Añade un borde blanco alrededor del círculo */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Agrega una sombra al círculo */
+    display: flex;
+    /* Activa el modelo de caja flexible */
+    justify-content: center;
+    /* Centra horizontalmente la imagen */
+    align-items: center;
+    /* Centra verticalmente la imagen */
+    margin-bottom: 10px;
+}
+
+.modal2 {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    /* Asegúrate de que el valor sea lo suficientemente alto */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Fondo semi-transparente para el modal */
+    justify-content: center;
+    align-items: center;
+    overflow-y:auto ;
+}
+
+.imagen-alimento img {
+    width: 100%;
+    /* Ajusta el ancho de la imagen al 100% del contenedor */
+    height: 100%;
+    /* Ajusta la altura de la imagen al 100% del contenedor */
+    object-fit: cover;
+    /* Ajusta la imagen para cubrir todo el área del contenedor manteniendo su relación de aspecto */
+    border-radius: 10%;
+    /* Hace que la imagen sea circular */
+}
+
+.datos {
+    text-align: left;
+}
+
+.datos p {
+    margin: 3px 0;
+    /* Reduciendo el margen de los párrafos */
+    font-size: 14px;
+    /* Reduciendo el tamaño de la fuente */
+}
+
+.modal2-content h2 {
+
+    color: #03a9f4;
+    justify-content: center;
+    text-align: center;
+
+}
+
+#showCharactersBtn {
+    background-color: #5eafff;
+    /* Color de fondo */
+    color: white;
+    /* Color del texto */
+    padding: 15px 30px;
+    /* Relleno del botón */
+    text-align: center;
+    /* Alineación del texto */
+    text-decoration: none;
+    /* Sin subrayado */
+    display: inline-block;
+    /* Para que se comporte como botón */
+    font-size: 16px;
+    /* Tamaño de la fuente */
+    border: none;
+    /* Sin borde */
+    border-radius: 12px;
+    /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Sombra */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    /* Transiciones para los efectos */
+    cursor: pointer;
+    /* Cambia el cursor al pasar sobre el botón */
+    margin-top: 5%;
+    margin-left: 10%;
+}
+
+#showCharactersBtn:hover {
+    background-color: #70dafe;
+    /* Color de fondo al pasar el cursor */
+    transform: scale(1.05);
+    /* Aumenta el tamaño ligeramente al pasar el cursor */
+}
+
 /* Estilos para el fondo con diseño */
 .background {
     position: absolute;
@@ -92,7 +282,7 @@ body {
 
 .images {
     margin-top: 100px;
-    margin-right: 300px;
+    margin-right: 250px;
     margin-left: -180px;
     /* Margen superior para evitar que las imágenes se superpongan al banner */
     /* Margen inferior para evitar que las imágenes se superpongan al encabezado del juego */
@@ -100,29 +290,30 @@ body {
 
 .board {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     /* Divide en tres columnas */
     gap: 20px;
     /* Espacio entre elementos */
 }
 
 .options {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-direction: column;
     /* Divide en tres columnas */
-    gap: 10px;
+    gap: 40px;
     /* Espacio entre elementos */
 }
 
 .card {
-    width: 170px;
-    height: 130px;
+    width: 150px;
+    height: 220px;
     margin-top: 3px;
 
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     cursor: pointer;
+    overflow: hidden;
 }
 
 .card img {
@@ -399,6 +590,11 @@ body {
     flex-wrap: wrap;
 }
 
+
+/*/
+
+/* Modal */
+
 .modalNext {
     display: none;
     position: fixed;
@@ -453,11 +649,6 @@ body {
     margin: 0;
     font-weight: bold;
 }
-
-/*/
-
-/* Modal */
-
 
 .game-info {
     display: flex;
@@ -523,6 +714,44 @@ body {
     }
 }
 
+.character-name {
+    font-size: 1.2rem;
+    color: #3f51b5;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.characteristics {
+    font-size: 0.9rem;
+    text-align: left;
+    max-height: 80px;
+    overflow-y: auto;
+    background: #f0f0f0;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.characteristics div {
+    background-color: #3f51b5;
+    color: #ffffff;
+    padding: 2px 5px;
+    margin: 2px 0;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.characteristics div.correct {
+    background-color: #4caf50;
+}
+
+.characteristics div.incorrect {
+    background-color: #f44336;
+}
+
+/* Positioning cards in an inverted triangle pattern */
+
+
 
 @media (min-width: 1310px) {
     body {
@@ -577,6 +806,72 @@ body {
         margin-bottom: 45px;
     }
 
+    .oraciones {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .card {
+        position: relative;
+        width: 150px;
+        height: 220px;
+        margin: 10px;
+        padding: 10px;
+        padding-right: 16px;
+        border-radius: 10px;
+        background-image: linear-gradient(to top, #d3d5fd, #ffffff);
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .character-name {
+        font-size: 1.2rem;
+        color: #3f51b5;
+        margin-bottom: 10px;
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+    }
+
+    .characteristics {
+        font-size: 0.9rem;
+        text-align: left;
+        max-height: 80px;
+        overflow-y: auto;
+        background-image: linear-gradient(to top, #d3d5fd, #ffffff);
+        padding: 5px;
+        border-radius: 5px;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        height: 100px;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .characteristics div {
+        background-color: transparent;
+        color: black;
+        padding: 2px 5px;
+        margin: 2px 0;
+        border-radius: 5px;
+        transition: background-color 0.3s ease-in-out;
+        font-weight: bold;
+    }
+
+    .characteristics div.correct {
+        background-color: #4caf50;
+    }
+
+    .characteristics div.incorrect {
+        background-color: #f44336;
+    }
 
 }
 
@@ -617,13 +912,61 @@ body {
 
 
     .card {
+        position: relative;
         width: 150px;
-        height: 130px;
-        margin-top: -5px;
-        background-color: white;
+        height: 150px;
+        margin: 10px;
+        padding: 10px;
         border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-image: linear-gradient(to top, #d3d5fd, #ffffff);
         cursor: pointer;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .character-name {
+        font-size: 1.2rem;
+        color: #3f51b5;
+        margin-bottom: 10px;
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+    }
+
+    .characteristics {
+        font-size: 0.9rem;
+        text-align: left;
+        max-height: 80px;
+        overflow-y: auto;
+        background-image: linear-gradient(to top, #d3d5fd, #ffffff);
+        padding: 5px;
+        border-radius: 5px;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        height: 100px;
+        overflow: hidden;
+    }
+
+    .characteristics div {
+        background-color: transparent;
+        color: black;
+        padding: 2px 5px;
+        margin: 2px 0;
+        border-radius: 5px;
+        transition: background-color 0.3s ease-in-out;
+        font-weight: bold;
+    }
+
+    .characteristics div.correct {
+        background-color: #4caf50;
+    }
+
+    .characteristics div.incorrect {
+        background-color: #f44336;
     }
 
 
@@ -631,13 +974,6 @@ body {
         margin-left: 20%;
         float: left;
     }
-
-
-
-
-
-
-
 
 }
 
@@ -648,7 +984,9 @@ body {
     body {
         margin: 0;
     }
-
+.modalNext-content p{
+    font-size: 1.5em;
+}
     .images {
 
         margin-top: 100px;
@@ -682,13 +1020,61 @@ body {
     }
 
     .card {
+        position: relative;
         width: 150px;
-        height: 130px;
-        margin-top: 3px;
-        background-color: white;
+        height: 150px;
+        margin: 10px;
+        padding: 10px;
         border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-image: linear-gradient(to top, #d3d5fd, #ffffff);
         cursor: pointer;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .character-name {
+        font-size: 1.2rem;
+        color: #3f51b5;
+        margin-bottom: 10px;
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+    }
+
+    .characteristics {
+        font-size: 0.9rem;
+        text-align: left;
+        max-height: 80px;
+        overflow-y: auto;
+        background-image: linear-gradient(to top, #d3d5fd, #ffffff);
+        padding: 5px;
+        border-radius: 5px;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        height: 100px;
+        overflow: hidden;
+    }
+
+    .characteristics div {
+        background-color: transparent;
+        color: black;
+        padding: 2px 5px;
+        margin: 2px 0;
+        border-radius: 5px;
+        transition: background-color 0.3s ease-in-out;
+        font-weight: bold;
+    }
+
+    .characteristics div.correct {
+        background-color: #4caf50;
+    }
+
+    .characteristics div.incorrect {
+        background-color: #f44336;
     }
 
     .oraciones {
@@ -710,7 +1096,9 @@ body {
         /* Margen superior para evitar que las imágenes se superpongan al banner */
         /* Margen inferior para evitar que las imágenes se superpongan al encabezado del juego */
     }
-
+    .modalNext-content p {
+        font-size: 0.8em;
+    }
     .container {
         max-width: 1289px;
         height: 100px;
@@ -724,6 +1112,7 @@ body {
         /* Divide en tres columnas */
         gap: 16px;
         /* Espacio entre elementos */
+        margin-left: 120%;
     }
 
     .options {
@@ -732,16 +1121,56 @@ body {
         /* Divide en dos columnas */
         gap: 1px;
         /* Espacio entre elementos */
+        margin-left: 35%;
     }
 
     .card {
+        position: relative;
         width: 150px;
         height: 130px;
-        margin-top: 3px;
-        background-color: white;
+        margin: 10px;
+        padding: 10px;
         border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-image: linear-gradient(to top, #d3d5fd, #ffffff);
         cursor: pointer;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .character-name {
+        font-size: 1.2rem;
+        color: #3f51b5;
+        margin-bottom: 10px;
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+    }
+
+    .characteristics {
+        font-size: 0.9rem;
+        text-align: left;
+        max-height: 80px;
+        overflow-y: auto;
+        background-image: linear-gradient(to top, #d3d5fd, #ffffff);
+        padding: 5px;
+        border-radius: 5px;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        height: 100px;
+    }
+
+    .characteristics div {
+        background-color: transparent;
+        color: black;
+        padding: 2px 5px;
+        margin: 2px 0;
+        border-radius: 5px;
+        transition: background-color 0.3s ease-in-out;
+        font-weight: bold;
     }
 
     .oraciones {
@@ -763,7 +1192,9 @@ body {
         /* Margen superior para evitar que las imágenes se superpongan al banner */
         /* Margen inferior para evitar que las imágenes se superpongan al encabezado del juego */
     }
-
+    .modalNext-content p {
+        font-size: 1.0em;
+    }
     .container {
         max-width: 1289px;
         height: 100px;
@@ -788,13 +1219,53 @@ body {
     }
 
     .card {
+        position: relative;
         width: 150px;
-        height: 130px;
-        margin-top: 3px;
-        background-color: white;
+        height: 150px;
+        margin: 10px;
+        padding: 10px;
         border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-image: linear-gradient(to top, #d3d5fd, #ffffff);
         cursor: pointer;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .character-name {
+        font-size: 1.2rem;
+        color: #3f51b5;
+        margin-bottom: 10px;
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+    }
+
+    .characteristics {
+        font-size: 0.9rem;
+        text-align: left;
+        max-height: 80px;
+        overflow-y: auto;
+        background-image: linear-gradient(to top, #d3d5fd, #ffffff);
+        padding: 5px;
+        border-radius: 5px;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        height: 100px;
+        overflow: hidden;
+    }
+
+    .characteristics div {
+        background-color: transparent;
+        color: black;
+        padding: 2px 5px;
+        margin: 2px 0;
+        border-radius: 5px;
+        transition: background-color 0.3s ease-in-out;
+        font-weight: bold;
     }
 
     .oraciones {
@@ -822,7 +1293,9 @@ body {
         /* ¡Agrega !important para priorizar este estilo! */
     }
 
-
+    .modalNext-content p {
+        font-size: 0.8em;
+    }
     .oraciones p {
         font-size: 25px;
         /* Ajusta el tamaño de fuente de las oraciones */
@@ -858,6 +1331,55 @@ body {
         /* Centra horizontalmente */
     }
 
+    .card {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        margin: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        background-image: linear-gradient(to top, #d3d5fd, #ffffff);
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .character-name {
+        font-size: 1.2rem;
+        color: #3f51b5;
+        margin-bottom: 10px;
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+    }
+
+    .characteristics {
+        font-size: 0.9rem;
+        text-align: left;
+        max-height: 80px;
+        overflow-y: auto;
+        background-image: linear-gradient(to top, #d3d5fd, #ffffff);
+        padding: 5px;
+        border-radius: 5px;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        height: 100px;
+        overflow: hidden;
+    }
+
+    .characteristics div {
+        background-color: transparent;
+        color: black;
+        padding: 2px 5px;
+        margin: 2px 0;
+        border-radius: 5px;
+        transition: background-color 0.3s ease-in-out;
+        font-weight: bold;
+    }
 
     .images {
         width: 100%;
@@ -892,6 +1414,58 @@ body {
         margin-left: -130px;
         margin-right: 30px;
     }
+    .modalNext-content p {
+        font-size: 0.8em;
+    }
+    .card {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        margin: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        background-image: linear-gradient(to top, #d3d5fd, #ffffff);
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .character-name {
+        font-size: 1.2rem;
+        color: #3f51b5;
+        margin-bottom: 10px;
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+    }
+
+    .characteristics {
+        font-size: 0.9rem;
+        text-align: left;
+        max-height: 80px;
+        overflow-y: auto;
+        background-image: linear-gradient(to top, #d3d5fd, #ffffff);
+        padding: 5px;
+        border-radius: 5px;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        height: 100px;
+        overflow: hidden;
+    }
+
+    .characteristics div {
+        background-color: transparent;
+        color: black;
+        padding: 2px 5px;
+        margin: 2px 0;
+        border-radius: 5px;
+        transition: background-color 0.3s ease-in-out;
+        font-weight: bold;
+    }
 
     .options {
         width: 90%;
@@ -919,10 +1493,9 @@ body {
     .mute-button {
         display: none;
     }
-    
-    .modalNext-content p{
+    .modalNext-content p {
         font-size: 0.8em;
-     }
+    }
     .images {
         width: 100%;
         /* Cambia a un porcentaje del ancho de la pantalla */
@@ -947,9 +1520,53 @@ body {
     }
 
     .card {
+        position: relative;
         width: 120px;
-        height: 120px;
+        height: 200px;
+        margin: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        background-image: linear-gradient(to top, #d3d5fd, #ffffff);
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
 
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .character-name {
+        font-size: 1.2rem;
+        color: #3f51b5;
+        margin-bottom: 10px;
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+    }
+
+    .characteristics {
+        font-size: 0.9rem;
+        text-align: left;
+        max-height: 80px;
+        overflow-y: auto;
+        background-image: linear-gradient(to top, #d3d5fd, #ffffff);
+        padding: 5px;
+        border-radius: 5px;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        height: 100px;
+        overflow: hidden;
+    }
+
+    .characteristics div {
+        background-color: transparent;
+        color: black;
+        padding: 2px 5px;
+        margin: 2px 0;
+        border-radius: 5px;
+        transition: background-color 0.3s ease-in-out;
+        font-weight: bold;
     }
 
     .hearts-container p2 {
@@ -968,7 +1585,9 @@ body {
         margin-left: auto;
         margin-right: auto;
     }
-
+    .modalNext-content p {
+        font-size: 0.8em;
+    }
     .game-info,
     .game-controls {
         margin-left: -4%;
@@ -982,14 +1601,11 @@ body {
         /* Agrega más ajustes según sea necesario */
     }
 
-    .modalNext-content p {
-        font-size: 0.8em;
-    }
 
     .texto {
         font-size: 13px;
         font-weight: bold;
-        color: #000;
+        color: #ffffff;
         margin-bottom: 10px;
         /* Espacio entre el texto y el contenedor de los corazones */
     }
@@ -1021,15 +1637,59 @@ body {
     }
 
     .board {
-
+        margin-left: -10%;
         gap: 12px;
         /* Espacio entre elementos */
     }
 
     .card {
-        width: 90px;
-        height: 90px;
+        position: relative;
+        width: 150px;
+        height: 150px;
+        margin: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        background-image: linear-gradient(to top, #d3d5fd, #ffffff);
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
 
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .character-name {
+        font-size: 1.2rem;
+        color: #3f51b5;
+        margin-bottom: 10px;
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+    }
+
+    .characteristics {
+        font-size: 0.9rem;
+        text-align: left;
+        max-height: 80px;
+        overflow-y: auto;
+        background-image: linear-gradient(to top, #d3d5fd, #ffffff);
+        padding: 5px;
+        border-radius: 5px;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        height: 100px;
+        overflow: hidden;
+    }
+
+    .characteristics div {
+        background-color: transparent;
+        color: black;
+        padding: 2px 5px;
+        margin: 2px 0;
+        border-radius: 5px;
+        transition: background-color 0.3s ease-in-out;
+        font-weight: bold;
     }
 
     .hearts-container p2 {

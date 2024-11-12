@@ -4,180 +4,89 @@ body {
     font-family: Arial, sans-serif;
     background-color: #FBF2F2;
     /* Color de fondo de la página */
+    /* Evita el desbordamiento del fondo animado */
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 12px 0;
 }
 
-*,
-*::after,
-*::before {
-    box-sizing: border-box;
-}
-
-html,
-body {
-    font-size: 16px;
-    margin: 0;
-    padding: 0;
-    line-height: 1.317101995;
-    scroll-behavior: smooth;
-    background-color: #ffffff;
-}
-
-.cards-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    padding-bottom: 60px;
-    margin-top: 40px;
-}
-
-/* FLIP CARD */
-.flip-card {
-    width: 260px;
-    height: 350px;
-    perspective: 2000px;
-}
-
-.flip-card-inner {
+.modal2-content {
+    background-color: #f0f0f0;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    width: 80%;
+    max-width: 800px;
     position: relative;
-    width: 100%;
-    height: 100%;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    border-radius: 20px;
-    transition: all 0.6s ease;
-    transform-style: preserve-3d;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
 }
 
-.flip-card-front,
-.flip-card-back {
+.close {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 20px;
-    backface-visibility: hidden;
-}
-
-.flip-card-front {
-    background: linear-gradient(135deg, #1e90ff 25%, transparent 25%) -50px 0,
-        linear-gradient(225deg, #1e90ff 25%, transparent 25%) -50px 0,
-        linear-gradient(315deg, #1e90ff 25%, transparent 25%),
-        linear-gradient(45deg, #1e90ff 25%, transparent 25%);
-    background-size: 100px 100px;
-    background-color: #B1CFC8;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Arial', sans-serif;
-    font-size: 1.5rem;
+    top: 10px;
+    right: 15px;
+    color: #aaa;
+    font-size: 28px;
     font-weight: bold;
-    animation: backgroundAnimation 4s infinite linear;
+    cursor: pointer;
 }
 
-.flip-card-back {
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.characters-grid {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #1e90ff 25%, transparent 25%) -50px 0,
-        linear-gradient(225deg, #1e90ff 25%, transparent 25%) -50px 0,
-        linear-gradient(315deg, #1e90ff 25%, transparent 25%),
-        linear-gradient(45deg, #1e90ff 25%, transparent 25%);
-    background-size: 100px 100px;
-    background-color: #B1CFC8;
-    transform: rotateY(180deg);
-    animation: backgroundAnimation 4s infinite linear;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
-.flip-card:hover .flip-card-inner {
-    transform: rotateY(180deg);
-}
-
-.imagen-personaje.circular {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    margin: 0 auto;
-    border: 2px solid #fff;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-}
-
-.imagen-personaje.circular img {
+.category {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+    /* Establece un tamaño fijo para el contenedor de la imagen */
+    height: 40px;
+    /* Establece un tamaño fijo para el contenedor de la imagen */
+    border-radius: 10px;
+    /* Hace que el contenedor de la imagen sea circular */
+    display: flex;
+    /* Activa el modelo de caja flexible */
+    justify-content: center;
+    /* Centra horizontalmente la imagen */
+    align-items: center;
+    /* Centra verticalmente la imagen */
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, #F07D36 0%, #FA6F19 50.5%);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
 }
+
+
 
 .datos {
-    font-size: 20px;
-    color: rgba(0, 0, 0, 0.7);
-    margin-top: 20px;
+    text-align: left;
+}
+
+.datos p {
+    margin: 3px 0;
+    /* Reduciendo el margen de los párrafos */
+    font-size: 14px;
+    /* Reduciendo el tamaño de la fuente */
+}
+
+.modal2-content h2 {
+
+    color: #03a9f4;
+    justify-content: center;
     text-align: center;
-    font-weight: bolder;
+
 }
 
-.nombre-personaje,
-.nombre-frontal {
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 10px;
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 5px 10px;
-    border-radius: 25px;
-    position: relative;
-    z-index: 1;
-}
-
-@keyframes backgroundAnimation {
-    0% {
-        background-position: 0 0, 0 0, 0 0, 0 0;
-    }
-
-    100% {
-        background-position: 100px 100px, 100px 100px, 100px 100px, 100px 100px;
-    }
-}
-
-.next-button-container {
-    position: fixed;
-    bottom: 20px;
-    /* Ajusta esta propiedad según sea necesario para la separación desde la parte inferior */
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-}
-
-#next-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #fff;
-    background-image: linear-gradient(to right, #448c3c, #3df856);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
-    margin-bottom: 25%;
-}
-
-#next-button:hover {
-    background-color: #45a049;
-}
-
-/* Animación al hacer hover */
-.carta:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-    /* Sombra más pronunciada */
-}
 
 /* Estilos para el fondo con diseño */
 .background {
@@ -225,6 +134,112 @@ body {
     animation: vibrarLogo 1s infinite alternate;
 }
 
+.correct {
+    border: 2px solid green;
+    /* Cambia esto según tu diseño */
+    transition: border 0.3s ease;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes bounceAnimation {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.images,
+.options {
+    width: 33%;
+    margin: 1%;
+}
+
+.images {
+    margin-top: 100px;
+    margin-right: 250px;
+    margin-left: -180px;
+    /* Margen superior para evitar que las imágenes se superpongan al banner */
+    /* Margen inferior para evitar que las imágenes se superpongan al encabezado del juego */
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* Divide en tres columnas */
+    gap: 20px;
+    /* Espacio entre elementos */
+}
+
+.options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* Divide en tres columnas */
+    gap:10px;
+    /* Espacio entre elementos */
+}
+
+.card {
+    width: 150px;
+    height: 220px;
+    margin-top: 3px;
+
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    overflow: hidden;
+    justify-content: center;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.card:hover img {
+    transform: scale(1.1);
+}
+
+
+.word {
+    border: 2px solid #2980b9;
+    text-align: center;
+    /* Centra el texto */
+    background-color: #EEEEFF;
+    color: #3F3BE1;
+    max-width: 150px;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    /* Cambios en el tipo de letra, tamaño y peso */
+    font-family: 'Inter', sans-serif;
+    /* Cambia el tipo de letra a Inter */
+    font-size: 16px;
+    /* Establece el tamaño del texto en 20px */
+    font-weight: 500;
+    /* Establece el peso del texto en 500 (medium) */
+}
 
 /* Estilos para el icono Mute */
 #mute-icon {
@@ -285,6 +300,10 @@ body {
     animation: moveArrow 2s ease infinite;
 }
 
+.word:hover {
+    background-color: #2980b9;
+    color: #EEEEFF;
+}
 
 .texto {
     font-size: 15px;
@@ -294,7 +313,54 @@ body {
 
 }
 
+.messages {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    display: none;
+    font-size: 24px;
+    color: white;
+    text-align: center;
+}
 
+#correct-message {
+    background-color: #2ecc71;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#error-message {
+    background-color: #e74c3c;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#completed {
+    background-color: #3498db;
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.selected {
+    border: 3px solid green;
+    /* Cambia el borde a verde */
+    transform: scale(1.1);
+    /* Agranda un poco la imagen */
+}
+
+.destroyed {
+    opacity: 0.5;
+    /* Reducir la opacidad */
+    filter: grayscale(100%);
+    /* Convertir la imagen en escala de grises */
+    pointer-events: none;
+    /* Desactivar los eventos del mouse */
+    cursor: default;
+    /* Cambiar el cursor a predeterminado */
+    /* También puedes añadir otras propiedades de estilo según sea necesario */
+}
 
 .action-text {
     position: absolute;
@@ -308,6 +374,12 @@ body {
     /* Oculta el texto inicialmente */
 }
 
+.card.destroyed .action-text {
+    display: block;
+    /* Muestra el texto cuando la carta está destruida */
+    color: white;
+    /* Cambia el color del texto */
+}
 
 @keyframes destroyAnimation {
     0% {
@@ -334,6 +406,15 @@ body {
 
 
 
+.oraciones {
+    display: flex;
+    justify-content: center;
+    /* Centra los elementos horizontalmente */
+    align-items: flex-start;
+    /* Alínea los elementos en la parte superior */
+    margin-top: -60px;
+    margin-left: 17%;
+}
 
 
 /* Estilos para los contenedores vacíos */
@@ -349,6 +430,38 @@ body {
 }
 
 /* Estilos para los botones dentro de los contenedores */
+.contenedor .boton {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90px;
+    height: 40px;
+    border-radius: 2cap;
+    background-color: greenyellow;
+    font-size: 15px;
+}
+
+.botones {
+    margin-top: 80px;
+    margin-left: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.botones button {
+    margin-bottom: 15px;
+    border-radius: 4cap;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 90px;
+    height: 40px;
+    margin-right: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
 
 
 
@@ -356,6 +469,60 @@ body {
 
 /* Modal */
 
+.modalNext {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+}
+
+.modalNext-content {
+    background: linear-gradient(to top, #f88f32, #ffbb77);
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 20%;
+    text-align: center;
+    animation: modalFadeIn 0.5s ease-out;
+    position: relative;
+}
+
+.modalNext.show {
+    opacity: 1;
+}
+
+.modalNext.hide {
+    opacity: 0;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modalNext-content p {
+    font-size: 1.5em;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 0;
+    font-weight: bold;
+}
 
 .game-info {
     display: flex;
@@ -421,6 +588,44 @@ body {
     }
 }
 
+.character-name {
+    font-size: 1.2rem;
+    color: #3f51b5;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.characteristics {
+    font-size: 0.9rem;
+    text-align: left;
+    height: 85%;
+    overflow-y: auto;
+    background: #f0f0f0;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.characteristics div {
+    background-color: #3f51b5;
+    color: #ffffff;
+    padding: 2px 5px;
+    margin: 2px 0;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.characteristics div.correct {
+    background-color: #4caf50;
+}
+
+.characteristics div.incorrect {
+    background-color: #f44336;
+}
+
+/* Positioning cards in an inverted triangle pattern */
+
+
 
 @media (min-width: 1310px) {
     body {
@@ -475,10 +680,76 @@ body {
         margin-bottom: 45px;
     }
 
+    .oraciones {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .card {
+        position: relative;
+        width: 150px;
+        height: 420px;
+        margin: 10px;
+        padding: 10px;
+        padding-right: 16px;
+        border-radius: 10px;
+        background-image: linear-gradient(to top, #d3d5fd, #ffffff);
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        justify-content: center;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .character-name {
+        font-size: 1.2rem;
+        color: #3f51b5;
+        margin-bottom: 10px;
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+    }
+
+    .characteristics {
+        font-size: 0.9rem;
+        text-align: left;
+        height: 85%;
+        overflow-y: auto;
+        background-image: linear-gradient(to top, #d3d5fd, #ffffff);
+        padding: 5px;
+        border-radius: 5px;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .characteristics div {
+        background-color: transparent;
+        color: black;
+        padding: 2px 5px;
+        margin: 2px 0;
+        border-radius: 5px;
+        transition: background-color 0.3s ease-in-out;
+        font-weight: bold;
+    }
+
+    .characteristics div.correct {
+        background-color: #4caf50;
+    }
+
+    .characteristics div.incorrect {
+        background-color: #f44336;
+    }
 
 }
 
-@media screen and (min-width: 1230px) and (max-width: 1309px) {
+@media screen and (min-width: 1101px) and (max-width: 1309px) {
     body {
         margin: 0;
     }
@@ -515,13 +786,60 @@ body {
 
 
     .card {
+        position: relative;
         width: 150px;
-        height: 130px;
-        margin-top: -5px;
-        background-color: white;
+        height: 150px;
+        margin: 10px;
+        padding: 10px;
         border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-image: linear-gradient(to top, #d3d5fd, #ffffff);
         cursor: pointer;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .character-name {
+        font-size: 1.2rem;
+        color: #3f51b5;
+        margin-bottom: 10px;
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+    }
+
+    .characteristics {
+        font-size: 0.9rem;
+        text-align: left;
+        overflow-y: auto;
+        background-image: linear-gradient(to top, #d3d5fd, #ffffff);
+        padding: 5px;
+        border-radius: 5px;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        height: 85%;
+        overflow: hidden;
+    }
+
+    .characteristics div {
+        background-color: transparent;
+        color: black;
+        padding: 2px 5px;
+        margin: 2px 0;
+        border-radius: 5px;
+        transition: background-color 0.3s ease-in-out;
+        font-weight: bold;
+    }
+
+    .characteristics div.correct {
+        background-color: #4caf50;
+    }
+
+    .characteristics div.incorrect {
+        background-color: #f44336;
     }
 
 
@@ -530,176 +848,8 @@ body {
         float: left;
     }
 
-
-
-
-
-
-
-
 }
 
-
-
-
-@media screen and (min-width: 1200px) and (max-width: 1229px) {
-    body {
-        margin: 0;
-    }
-
-    .images {
-
-        margin-top: 100px;
-        margin-right: 260px;
-        margin-left: -290px;
-        /* Margen superior para evitar que las imágenes se superpongan al banner */
-        /* Margen inferior para evitar que las imágenes se superpongan al encabezado del juego */
-    }
-
-    .container {
-        max-width: 1289px;
-        height: 100px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .board {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        /* Divide en tres columnas */
-        gap: 12px;
-        /* Espacio entre elementos */
-    }
-
-    .options {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        /* Divide en dos columnas */
-        gap: 2px;
-        /* Espacio entre elementos */
-    }
-
-    .card {
-        width: 150px;
-        height: 130px;
-        margin-top: 3px;
-        background-color: white;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        cursor: pointer;
-    }
-
-    .oraciones {
-        margin-left: 20%;
-        float: left;
-    }
-}
-
-@media screen and (min-width: 1100px) and (max-width: 1199px) {
-    body {
-        margin: 0;
-    }
-
-    .images {
-
-        margin-top: 100px;
-        margin-right: 260px;
-        margin-left: -290px;
-        /* Margen superior para evitar que las imágenes se superpongan al banner */
-        /* Margen inferior para evitar que las imágenes se superpongan al encabezado del juego */
-    }
-
-    .container {
-        max-width: 1289px;
-        height: 100px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .board {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        /* Divide en tres columnas */
-        gap: 16px;
-        /* Espacio entre elementos */
-    }
-
-    .options {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        /* Divide en dos columnas */
-        gap: 1px;
-        /* Espacio entre elementos */
-    }
-
-    .card {
-        width: 150px;
-        height: 130px;
-        margin-top: 3px;
-        background-color: white;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        cursor: pointer;
-    }
-
-    .oraciones {
-        margin-left: 20%;
-        float: left;
-    }
-}
-
-@media screen and (min-width: 1101px) and (max-width: 1199px) {
-    body {
-        margin: 0;
-    }
-
-    .images {
-
-        margin-top: 100px;
-        margin-right: 260px;
-        margin-left: -290px;
-        /* Margen superior para evitar que las imágenes se superpongan al banner */
-        /* Margen inferior para evitar que las imágenes se superpongan al encabezado del juego */
-    }
-
-    .container {
-        max-width: 1289px;
-        height: 100px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .board {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        /* Divide en tres columnas */
-        gap: 16px;
-        /* Espacio entre elementos */
-    }
-
-    .options {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        /* Divide en dos columnas */
-        gap: 1px;
-        /* Espacio entre elementos */
-    }
-
-    .card {
-        width: 150px;
-        height: 130px;
-        margin-top: 3px;
-        background-color: white;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        cursor: pointer;
-    }
-
-    .oraciones {
-        margin-left: 20%;
-        float: left;
-    }
-}
 
 @media screen and (min-width: 680px) and (max-width: 1100px) {
     /* Ajustes específicos para dispositivos con anchura entre 301px y 899px */
@@ -720,7 +870,9 @@ body {
         /* ¡Agrega !important para priorizar este estilo! */
     }
 
-
+    .modalNext-content p {
+        font-size: 0.8em;
+    }
     .oraciones p {
         font-size: 25px;
         /* Ajusta el tamaño de fuente de las oraciones */
@@ -756,6 +908,55 @@ body {
         /* Centra horizontalmente */
     }
 
+    .card {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        margin: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        background-image: linear-gradient(to top, #d3d5fd, #ffffff);
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .character-name {
+        font-size: 1.2rem;
+        color: #3f51b5;
+        margin-bottom: 10px;
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+    }
+
+    .characteristics {
+        font-size: 0.9rem;
+        text-align: left;
+        height: 80px;
+        overflow-y: auto;
+        background-image: linear-gradient(to top, #d3d5fd, #ffffff);
+        padding: 5px;
+        border-radius: 5px;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        height: 100px;
+        overflow: hidden;
+    }
+
+    .characteristics div {
+        background-color: transparent;
+        color: black;
+        padding: 2px 5px;
+        margin: 2px 0;
+        border-radius: 5px;
+        transition: background-color 0.3s ease-in-out;
+        font-weight: bold;
+    }
 
     .images {
         width: 100%;
@@ -771,207 +972,4 @@ body {
         display: none;
         /* Oculta la palabra "Vidas" */
     }
-}
-
-@media screen and (min-width: 600px) and (max-width: 679px) {
-
-    /* Ajustes específicos para dispositivos con anchura entre 301px y 899px */
-    .modalNext-content p {
-        font-size: 0.8em;
-    }
-
-    .mute-button {
-        display: none;
-    }
-
-    .images {
-        width: 100%;
-        /* Cambia a un porcentaje del ancho de la pantalla */
-
-        margin-bottom: 50px;
-        /* Ajusta el margen inferior */
-        margin-left: -130px;
-        margin-right: 30px;
-    }
-
-    .options {
-        width: 90%;
-        margin-top: -20px;
-        order: 2 !important;
-        /* ¡Agrega !important para priorizar este estilo! */
-    }
-
-    .board {
-
-        gap: 12px;
-        /* Espacio entre elementos */
-    }
-
-    .hearts-container p2 {
-        display: none;
-        /* Oculta la palabra "Vidas" */
-    }
-}
-
-@media screen and (min-width: 500px) and (max-width: 599px) {
-    /* Ajustes específicos para dispositivos con anchura entre 301px y 899px */
-
-    .modalNext-content p {
-        font-size: 0.8em;
-    }
-
-    .mute-button {
-        display: none;
-    }
-
-    .images {
-        width: 100%;
-        /* Cambia a un porcentaje del ancho de la pantalla */
-
-        margin-bottom: 50px;
-        /* Ajusta el margen inferior */
-        margin-left: -27px;
-        margin-right: 30px;
-    }
-
-    .options {
-        width: 90%;
-        margin-top: -20px;
-        order: 2 !important;
-        /* ¡Agrega !important para priorizar este estilo! */
-    }
-
-    .board {
-
-        gap: 12px;
-        /* Espacio entre elementos */
-    }
-
-    .card {
-        width: 120px;
-        height: 120px;
-
-    }
-
-    .hearts-container p2 {
-        display: none;
-        /* Oculta la palabra "Vidas" */
-    }
-}
-
-@media screen and (min-width: 200px) and (max-width: 499px) {
-
-    /* Ajustes específicos para dispositivos con anchura entre 301px y 899px */
-    .container {
-        max-width: 90%;
-        /* Cambia a un porcentaje del ancho de la pantalla */
-        height: 100px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .game-info,
-    .game-controls {
-        margin-left: -4%;
-        /* Reducir el margen izquierdo */
-        /* Agrega más ajustes según sea necesario */
-    }
-
-    .hearts-container {
-        margin-right: -90px;
-        /* Reducir el margen izquierdo */
-        /* Agrega más ajustes según sea necesario */
-    }
-
-    .modalNext-content p {
-        font-size: 0.8em;
-    }
-
-    .texto {
-        font-size: 13px;
-        font-weight: bold;
-        color: #000;
-        margin-bottom: 10px;
-        /* Espacio entre el texto y el contenedor de los corazones */
-    }
-
-    .game-controls {
-        order: 2;
-        /* Establecer el orden del elemento en la columna */
-    }
-
-    .mute-button {
-        display: none;
-    }
-
-    .images {
-        width: 100%;
-        /* Cambia a un porcentaje del ancho de la pantalla */
-
-        margin-bottom: 50px;
-        /* Ajusta el margen inferior */
-        margin-left: -27px;
-        margin-right: 30px;
-    }
-
-    .options {
-        width: 90%;
-        margin-top: -20px;
-        order: 2 !important;
-        /* ¡Agrega !important para priorizar este estilo! */
-    }
-
-    .board {
-
-        gap: 12px;
-        /* Espacio entre elementos */
-    }
-
-    .card {
-        width: 90px;
-        height: 90px;
-
-    }
-
-    .hearts-container p2 {
-        display: none;
-        /* Oculta la palabra "Vidas" */
-    }
-
-
-}
-
-.tutorial-container {
-    position: fixed;
-    top: 50%;
-    left: 20px;
-    /* Ajusta el valor según tu preferencia */
-    transform: translateY(-50%);
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 10px;
-    border-radius: 5px;
-    z-index: 9999;
-    /* Asegura que esté por encima de otros elementos */
-    display: flex;
-    align-items: center;
-}
-
-.tutorial-text {
-    margin-right: 10px;
-}
-
-.tutorial-icon {
-    cursor: pointer;
-}
-
-.carta {
-    cursor: pointer;
-    border: 2px solid #FF7F50;
-    position: relative;
-    /* Añadido */
-}
-
-.tutorial-container.clicked {
-    display: none;
-    /* Oculta el contenedor del tutorial cuando se ha hecho clic en una carta */
 }

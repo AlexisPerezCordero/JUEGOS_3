@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reto 1</title>
-    <link rel="stylesheet" href="./estilo.css">
+    <link rel="stylesheet" href="./estilo1.css">
     <link rel="stylesheet" href="../modal/syle.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,24 +17,15 @@
 </head>
 
 <body>
-
     <div class="container">
-
         <div class="game-info">
-            <p class="texto">¡Reto 1: Relaciona Imágenes con Verbos Reflexivos!</p>
+            <p class="texto">!Reto 1: Relaciona las frases con su respectivo uso!</p>
             <!-- Contenido del banner, como el título del juego y la descripción -->
             <div class="menu-container">
-
-
             </div>
-
-
             <div class="game-controls">
-
-
                 <div class="hearts-container">
                     <p2>Vidas</p2>
-
                     <span class="heart">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                             style="fill: rgba(214, 125, 125, 1);">
@@ -59,69 +50,42 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 
     <div class="oraciones">
         <div class="images">
             <div class="board">
                 <!-- Imágenes -->
-                <div class="card" data-word="Levantarse">
-                    <img src="../imagen/Despertarse_9_11zon.webp" alt="Persona Levitandose">
+                <div class="card" data-word="1">
+                    <div class="imagen-alimento"><img src="../imagen/M7_1.png" alt="Amazonas"></div>
+                    <div class="characteristics">De niño, me  encantaba que mis  padres me llevaran a  las montañas.</div>
                 </div>
-                <div class="card" data-word="Desayunarse">
-                    <img src="../imagen/Desayunando_8_11zon.webp" alt="Persona Desayunado">
+                <div class="card" data-word="2">
+                    <div class="imagen-alimento"><img src="../imagen/M7_2.png" alt="Pacifico"></div>
+                    <div class="characteristics">Si fuera presidente  de mi país, mejoraría   el sistema de salud.</div>
                 </div>
-                <div class="card" data-word="Vestirse">
-                    <img src="../imagen/Vestirse_17_11zon.webp" alt="Persona Vistiendose">
+                <div class="card" data-word="3">
+                    <div class="imagen-alimento"><img src="../imagen/M7_3.png" alt="Andes"></div>
+                    <div class="characteristics">Quisiera pedir  un silpancho, por  favor.</div>
                 </div>
-                <div class="card" data-word="Afeitarse">
-                    <img src="../imagen/Afeitarse_2_11zon.webp" alt="Persona Afeitandose">
+                <div class="card" data-word="4">
+                    <div class="imagen-alimento"><img src="../imagen/M7_4.png" alt="Colca"></div>
+                    <div class="characteristics">Mi abuela no creía  que fuera a visitarla  por su cumpleaños.</div>
                 </div>
-                <div class="card" data-word="Sentarse">
-                    <img src="../imagen/Sentarse_16_11zon.webp" alt="Persona Sentandose">
-                </div>
-                <div class="card" data-word="Secarse">
-                    <img src="../imagen/Secandose_15_11zon.webp" alt="Persona Secandose">
-                </div>
-                <div class="card" data-word="Bañarse">
-                    <img src="../imagen/Bañarse_3.webp" alt="Persona Bañandose">
-                </div>
-                <div class="card" data-word="Cepillarse">
-                    <img src="../imagen/Cepillandose_5_11zon.webp" alt="Persona Cepillandose">
-                </div>
-                <div class="card" data-word="Dormirse">
-                    <img src="../imagen//Acostarse_1_11zon.webp" alt="Persona Durmiendo">
-                </div>
-
-
                 <!-- Agrega más cartas aquí -->
-            </div>
+            </div>  
         </div>
     </div>
     <div class="options">
         <!-- Opciones -->
-        <div class="word" data-word="Cepillarse">Cepillarse</div>
-        <div class="word" data-word="Levantarse">Levantarse</div>
-        <div class="word" data-word="Bañarse">Bañarse</div>
-        <div class="word" data-word="Dormirse">Dormirse</div>
-        <div class="word" data-word="Secarse"> Secarse</div>
-        <div class="word" data-word="Vestirse">Vestirse</div>
-        <div class="word" data-word="Sentarse">Sentarse</div>
-        <div class="word" data-word="Afeitarse">Afeitarse</div>
-        <div class="word" data-word="Desayunarse">Desayunarse</div>
-
+        <div class="word" data-word="2">Para situaciones hipotéticas.</div>
+        <div class="word" data-word="4">Para expresar duda en el pasado.</div>
+        <div class="word" data-word="1">Para oraciones subordinadas con el verbo principal en pasado.</div>
+        <div class="word" data-word="3">Para expresar cortesía al pedir algo.</div>
         <!-- Agrega más opciones aquí -->
     </div>
 
-    <div id="modal" class="modalNext">
-        <div class="modalNext-content">
-            <p>¡BIEN HECHO!</p>
-            <p>¡RETO 1 COMPLETADO!</p>
-        </div>
-    </div>
-
+    
     <div class="messages">
         <div id="correct-message">¡Correcto!</div>
         <div id="error-message">¡Incorrecto!</div>
@@ -131,11 +95,18 @@
 
     <div id="gameOverModal" class="modal">
         <div class="modal-content">
-            <h2 style="text-align: center; font-family: 'Freeman', sans-serif;">GAME OVER</h2>
+            <h2 style="text-align: center; font-family: 'Freeman', cursive;">GAME OVER</h2>
             <div class="modal-buttons">
                 <button id="reintentarBtn">Reintentar</button>
                 <button id="salirBtn">Salir</button>
             </div>
+        </div>
+    </div>
+
+    <div id="modal" class="modalNext">
+        <div class="modalNext-content">
+            <p>¡BIEN HECHO!</p>
+            <p>¡RETO 1 COMPLETADO!</p>
         </div>
     </div>
 
@@ -173,14 +144,13 @@
     </svg>
 
     <audio id="audioElement" autoplay loop>
-        <source src="../audio/level2.mp3" type="audio/mp3">
+        <source src="../audio/level.mp3" type="audio/mp3">
     </audio>
 
     <audio id="audioCorrecto" src="../audio/correcto.mp3"></audio>
     <audio id="audioIncorrecto" src="../audio/incorrecto.mp3"></audio>
     <audio id="audioGameOver" src="../audio/gameover.mp3"></audio>
 
-    <script src="script1.js"></script>
+    <script src="sc1.js"></script>
 </body>
-
 </html>
