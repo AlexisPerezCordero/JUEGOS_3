@@ -17,7 +17,12 @@ body {
     opacity: 0.5;
     animation: animateBackground 1s linear infinite alternate;
 }
-
+.selected {
+    transform: scale(1.1);
+    border-color: rgb(153, 255, 0);
+    color: black !important;
+    background-color: rgb(210, 241, 197) !important;
+}
 .titulo-principal {
     text-align: center;
     color: rgba(120, 7, 7, 0.801);
